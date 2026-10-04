@@ -1,0 +1,9 @@
+FM SIGNALS VIRTUAL LAB — QUICK START
+
+1. Extract this folder.
+2. Open the folder in VS Code.
+3. Open index.html with Live Server.
+4. Use the left navigation to move through the ONE FM experiment.
+5. The Walkie-Talkie Simulator is a separate application module inside the same experiment.
+
+If you see plain HTML, do NOT open an old ZIP/folder. Make sure index.html, style.css and app.js are in the same folder and use Live Server.

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive Signals and Systems virtual laboratory experiment on Frequency Modulation and an educational FM walkie-talkie simulator.">
+<title>FM Signals Virtual Laboratory | Signals & Systems</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="landing" class="landing-screen">
+  <div class="landing-grid"></div><div class="signal-particle p1"></div><div class="signal-particle p2"></div><div class="signal-particle p3"></div>
+  <div class="landing-wave wave1"></div><div class="landing-wave wave2"></div><div class="landing-wave wave3"></div>
+  <div class="landing-inner">
+    <div class="landing-mark"><span>FM</span><i></i><i></i><i></i></div>
+    <div class="eyebrow">SIGNALS & SYSTEMS • VIRTUAL LABORATORY</div>
+    <h1>FREQUENCY<br><span>MODULATION</span></h1>
+    <p class="landing-sub">Explore the signal. Watch the spectrum. Experience the radio link.</p>
+    <div class="landing-chain"><span>MESSAGE</span><b>→</b><span>FM</span><b>→</b><span>RF CHANNEL</span><b>→</b><span>DEMOD</span><b>→</b><span>AUDIO</span></div>
+    <button id="enterLab" class="enter-lab">ENTER VIRTUAL LAB <span>→</span></button>
+    <small class="landing-note">Interactive browser simulation • No real RF transmission</small>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">FM</div>
+    <div><strong>FM Signals Virtual Laboratory</strong><span>Signals & Systems • SY ENTC</span></div>
+  </div>
+  <div class="top-actions"><span class="lab-badge">VIRTUAL EXPERIMENT</span><button id="themeBtn" class="icon-btn" title="Toggle light / dark theme">☀</button><button id="presentationBtn" class="icon-btn" title="Presentation mode">▣</button><button id="siteFullscreen" class="icon-btn" title="Full screen website">⛶</button></div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="side-title">SINGLE EXPERIMENT</div>
+  <button class="side-link active" data-view="overview"><span>01</span> Experiment Overview</button>
+  <button class="side-link" data-view="theory"><span>02</span> Theory & Mathematics</button>
+  <button class="side-link" data-view="procedure"><span>03</span> Procedure</button>
+  <button class="side-link" data-view="simulation"><span>04</span> FM Signal Simulator</button>
+  <button class="side-link" data-view="analysis"><span>05</span> FFT & Spectrum</button>
+  <button class="side-link" data-view="channel"><span>06</span> Channel & Noise</button>
+  <button class="side-link walkie-link" data-view="walkie"><span>07</span> Walkie-Talkie Simulator</button>
+  <button class="side-link" data-view="observations"><span>08</span> Observations</button>
+  <button class="side-link" data-view="viva"><span>09</span> Viva / Self Evaluation</button>
+  <button class="side-link" data-view="references"><span>10</span> References</button>
+  <div class="side-note"><b>Learning chain</b><br>Message → FM Modulator → Channel → FM Demodulator → Recovered Message</div>
+  <div class="side-footer">Educational browser simulation.<br>No RF energy is transmitted.</div>
+</aside>
+
+<main class="content">
+<!-- OVERVIEW -->
+<section id="overview" class="view active">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">SIGNALS • SPECTRUM • COMMUNICATION</div>
+      <h1>Study of <span>Frequency Modulation</span></h1>
+      <p>Build an FM signal from a message and carrier, observe its time-domain waveform, inspect its spectrum using FFT, introduce channel impairments, and finally operate a virtual push-to-talk FM walkie-talkie.</p>
+      <div class="hero-buttons"><button class="primary" data-jump="simulation">Start Experiment →</button><button class="ghost" data-jump="walkie">Open Walkie-Talkie</button></div>
+      <div class="hero-facts"><div><b>10</b><small>learning modules</small></div><div><b>6+</b><small>interactive plots</small></div><div><b>PTT</b><small>radio application</small></div></div>
+    </div>
+    <div class="hero-visual">
+      <div class="signal-orbit orbit-a"></div><div class="signal-orbit orbit-b"></div>
+      <div class="hero-radio"><div class="antenna"></div><div class="radio-top"><span>FM-SS</span><i></i></div><div class="radio-display"><small>VIRTUAL RADIO</small><b id="heroFrequency">CH 01</b><em>RX</em></div><div class="speaker-grill"></div><div class="radio-knobs"><i></i><i></i><i></i></div><div class="hero-ptt">PUSH<br><b>TO TALK</b></div></div>
+    </div>
+  </div>
+
+  <div class="notice"><span>i</span><div><b>How to use this lab</b><p>Follow the modules in order. Change one parameter at a time, run the simulator, observe the plots, and record what changes. The separate walkie-talkie module is the practical application of the same FM signal chain.</p></div></div>
+
+  <div class="section-title"><div><div class="eyebrow">01 • OBJECTIVE</div><h2>What you will learn</h2></div></div>
+  <div class="objective-grid">
+    <article><b>01</b><h3>Generate FM</h3><p>Understand how a low-frequency message changes the instantaneous frequency of a high-frequency carrier.</p></article>
+    <article><b>02</b><h3>Measure parameters</h3><p>Relate message frequency, carrier frequency, frequency deviation, modulation index and bandwidth.</p></article>
+    <article><b>03</b><h3>See the spectrum</h3><p>Use a discrete Fourier transform / FFT to move from time domain to frequency domain and identify spectral components.</p></article>
+    <article><b>04</b><h3>Model a channel</h3><p>Introduce attenuation and additive noise and examine their effect on the received waveform.</p></article>
+    <article><b>05</b><h3>Demodulate</h3><p>Recover an estimate of the original message from the instantaneous phase/frequency of the received FM signal.</p></article>
+    <article class="accent-card"><b>06</b><h3>Apply it to radio</h3><p>Operate a virtual push-to-talk walkie-talkie and follow audio → FM → channel → demodulation → recovered audio.</p></article>
+  </div>
+
+  <div class="section-title"><div><div class="eyebrow">LEARNING PATH</div><h2>One connected FM experiment</h2></div></div>
+  <div class="path">
+    <div class="path-item"><span>1</span><b>Objective</b><small>Define the experiment</small></div><i>→</i><div class="path-item"><span>2</span><b>Theory</b><small>Build the model</small></div><i>→</i><div class="path-item"><span>3</span><b>Simulation</b><small>Generate FM</small></div><i>→</i><div class="path-item"><span>4</span><b>FFT</b><small>Inspect spectrum</small></div><i>→</i><div class="path-item"><span>5</span><b>Channel</b><small>Add impairments</small></div><i>→</i><div class="path-item highlight"><span>6</span><b>Walkie-Talkie</b><small>Real application</small></div>
+  </div>
+
+  <div class="two-col">
+    <article class="card"><div class="card-head"><span class="icon blue">∿</span><div><div class="eyebrow">AIM</div><h3>Study Frequency Modulation</h3></div></div><p>To generate a frequency-modulated signal, observe its time-domain and frequency-domain characteristics, study the effect of modulation parameters and channel noise, and understand FM as used in a two-way voice communication system.</p></article>
+    <article class="card"><div class="card-head"><span class="icon blue">✓</span><div><div class="eyebrow">PRE-REQUISITES</div><h3>Before starting</h3></div></div><ul class="checklist"><li>Sinusoidal signals and basic frequency concepts</li><li>Amplitude, phase and frequency of a sinusoid</li><li>Fourier transform / spectrum basics</li><li>Basic idea of analog communication</li></ul></article>
+  </div>
+</section>
+
+<!-- THEORY -->
+<section id="theory" class="view">
+  <div class="page-head"><div><div class="eyebrow">02 • THEORY & MATHEMATICS</div><h1>Frequency Modulation from first principles</h1><p>FM carries information by varying the instantaneous frequency of a carrier while ideally keeping its amplitude constant.</p></div><div class="page-number">02</div></div>
+  <div class="formula-hero"><div><span>FM SIGNAL</span><strong>s(t) = A<sub>c</sub> cos[2πf<sub>c</sub>t + 2πk<sub>f</sub>∫m(τ)dτ]</strong><small>For a single-tone message, the instantaneous frequency varies sinusoidally around the carrier.</small></div><div class="formula-chip">β = Δf / f<sub>m</sub></div></div>
+  <div class="theory-grid">
+    <article class="card"><h3>1. Message signal</h3><p>Let the message be a sinusoid:</p><div class="equation">m(t) = A<sub>m</sub> cos(2πf<sub>m</sub>t)</div><p>Here A<sub>m</sub> is the message amplitude and f<sub>m</sub> is its frequency.</p></article>
+    <article class="card"><h3>2. Carrier</h3><p>A high-frequency carrier is used as the basis of transmission:</p><div class="equation">c(t) = A<sub>c</sub> cos(2πf<sub>c</sub>t)</div><p>Usually f<sub>c</sub> is much larger than f<sub>m</sub>.</p></article>
+    <article class="card"><h3>3. Instantaneous frequency</h3><p>In FM, information changes the instantaneous frequency:</p><div class="equation">f<sub>i</sub>(t) = f<sub>c</sub> + Δf · cos(2πf<sub>m</sub>t)</div><p>Δf is the peak frequency deviation.</p></article>
+    <article class="card"><h3>4. Modulation index</h3><div class="equation large">β = Δf / f<sub>m</sub></div><p>A larger β generally produces more significant sidebands and a wider occupied spectrum.</p></article>
+  </div>
+  <div class="card"><h3>Carson's rule</h3><p>For a single-tone FM signal, a commonly used engineering estimate for bandwidth is:</p><div class="equation large">B<sub>T</sub> ≈ 2(Δf + f<sub>m</sub>) = 2f<sub>m</sub>(β + 1)</div><div class="mini-grid"><div><b>f<sub>m</sub></b><span>message frequency</span></div><div><b>f<sub>c</sub></b><span>carrier frequency</span></div><div><b>Δf</b><span>peak deviation</span></div><div><b>β</b><span>modulation index</span></div></div></div>
+  <div class="two-col"><article class="card"><h3>Why the waveform looks different</h3><p>In an ideal FM waveform, the envelope remains approximately constant. When the message becomes positive, instantaneous frequency increases; when the message becomes negative, instantaneous frequency decreases. This appears visually as changing spacing between the carrier cycles.</p></article><article class="card"><h3>FM versus AM — conceptual view</h3><div class="compare"><div><b>FM</b><span>Information primarily changes frequency.</span></div><div><b>AM</b><span>Information primarily changes amplitude.</span></div></div></article></div>
+</section>
+
+<!-- PROCEDURE -->
+<section id="procedure" class="view">
+  <div class="page-head"><div><div class="eyebrow">03 • PROCEDURE</div><h1>Step-by-step experiment</h1><p>Use the following sequence as your laboratory procedure and record your observations after each major change.</p></div><div class="page-number">03</div></div>
+  <div class="procedure-list">
+    <div><span>01</span><div><h3>Set the message</h3><p>Choose the message frequency f<sub>m</sub> and amplitude. Start with a simple sinusoidal message.</p></div></div>
+    <div><span>02</span><div><h3>Set the carrier</h3><p>Choose a carrier frequency f<sub>c</sub> that is sufficiently higher than the message frequency for clear visualization.</p></div></div>
+    <div><span>03</span><div><h3>Choose frequency deviation</h3><p>Set Δf. Observe how changing deviation changes β and the bandwidth estimate.</p></div></div>
+    <div><span>04</span><div><h3>Generate FM</h3><p>Run the FM simulator and compare message, carrier and FM waveforms.</p></div></div>
+    <div><span>05</span><div><h3>Inspect FFT</h3><p>Move to the frequency-domain view. Locate the carrier region and important sideband components.</p></div></div>
+    <div><span>06</span><div><h3>Add channel impairment</h3><p>Increase noise and attenuation gradually. Observe changes in the received and recovered waveforms.</p></div></div>
+    <div><span>07</span><div><h3>Open the walkie-talkie</h3><p>Use the separate PTT simulator as an application of the same FM chain. Load an audio file or use the built-in demo signal.</p></div></div>
+    <div><span>08</span><div><h3>Record observations</h3><p>Note how f<sub>m</sub>, Δf, β, bandwidth, noise and attenuation affect the displayed signals.</p></div></div>
+  </div>
+  <div class="warning"><b>Simulation note:</b> The numerical values are scaled for browser visualization. They demonstrate FM principles and signal processing; they are not a design for an RF transmitter.</div>
+</section>
+
+<!-- SIMULATION -->
+<section id="simulation" class="view">
+  <div class="page-head"><div><div class="eyebrow">04 • FM SIGNAL SIMULATOR</div><h1>Generate and observe an FM signal</h1><p>Change the controls and press <b>Run Simulation</b>. The plots update immediately.</p></div><div class="live-pill"><i></i> LIVE SIMULATOR</div></div>
+  <div class="control-panel">
+    <div class="control-head"><div><b>Signal parameters</b><small>Start with the default values, then change one variable at a time.</small></div><button id="runFM" class="primary">▶ Run Simulation</button></div>
+    <div class="controls-grid">
+      <label><span>Message frequency f<sub>m</sub></span><output id="fmOut">5 Hz</output><input id="fm" type="range" min="1" max="20" step="1" value="5"></label>
+      <label><span>Carrier frequency f<sub>c</sub></span><output id="fcOut">100 Hz</output><input id="fc" type="range" min="40" max="300" step="5" value="100"></label>
+      <label><span>Frequency deviation Δf</span><output id="devOut">25 Hz</output><input id="dev" type="range" min="5" max="100" step="1" value="25"></label>
+      <label><span>Message amplitude A<sub>m</sub></span><output id="ampOut">1.0</output><input id="amp" type="range" min="0.2" max="1.5" step="0.1" value="1"></label>
+      <label><span>Channel noise</span><output id="noiseOut">0 %</output><input id="noise" type="range" min="0" max="35" step="1" value="0"></label>
+      <label><span>Attenuation</span><output id="attOut">0 %</output><input id="att" type="range" min="0" max="70" step="1" value="0"></label>
+    </div>
+    <div class="metrics"><div><span>Modulation index β</span><b id="beta">5.00</b></div><div><span>Carson bandwidth</span><b id="bw">60 Hz</b></div><div><span>Peak deviation</span><b id="devMetric">25 Hz</b></div><div><span>Channel SNR*</span><b id="snr">∞ dB</b></div></div>
+    <div class="control-room">
+      <div class="control-room-head"><div><div class="eyebrow">LIVE CONTROL ROOM</div><h3>FM signal health & engineering insight</h3></div><span id="healthBadge" class="health-badge">SIGNAL HEALTH 100%</span></div>
+      <div class="control-room-grid">
+        <div class="meter-card"><span>Signal quality</span><div class="meter"><i id="healthMeter"></i></div><b id="healthValue">100%</b></div>
+        <div class="readout-card"><span>Instantaneous frequency range</span><b id="freqRange">75–125 Hz</b><small>f<sub>c</sub> ± Δf</small></div>
+        <div class="readout-card"><span>Spectrum markers</span><b id="markerReadout">75 / 100 / 125 Hz</b><small>lower sideband / carrier / upper sideband</small></div>
+        <div class="insight-live"><span>INSIGHT</span><p id="liveInsight">Start with the default values, then change one parameter at a time.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="plot-grid">
+    <article class="plot-card"><div><h3>Message signal m(t)</h3><span>baseband • time domain</span></div><canvas id="msgPlot"></canvas></article>
+    <article class="plot-card"><div><h3>Carrier c(t)</h3><span>unmodulated carrier</span></div><canvas id="carrierPlot"></canvas></article>
+    <article class="plot-card wide"><div><h3>FM signal s(t)</h3><span>constant-envelope signal with changing cycle spacing</span></div><canvas id="fmPlot"></canvas></article>
+    <article class="plot-card wide"><div><h3>Received signal</h3><span>after attenuation + additive noise</span></div><canvas id="receivedPlot"></canvas></article>
+  </div>
+  <div class="interpret-card"><div class="interpret-icon">∿</div><div><b>What should you observe?</b><p>Increase Δf: the carrier's instantaneous frequency swings farther from f<sub>c</sub>. Increase f<sub>m</sub> while keeping Δf fixed: β decreases. Add noise: the received waveform becomes irregular. Add attenuation: the received amplitude falls.</p></div></div>
+</section>
+
+<!-- ANALYSIS -->
+<section id="analysis" class="view">
+  <div class="page-head"><div><div class="eyebrow">05 • FOURIER / FFT ANALYSIS</div><h1>See FM in the frequency domain</h1><p>The FFT decomposes the sampled waveform into frequency components. Use it to connect the waveform you see in time to the spectrum predicted by FM theory.</p></div><div class="page-number">05</div></div>
+  <div class="fft-layout"><article class="plot-card large"><div><h3>FM magnitude spectrum</h3><span>frequency on horizontal axis • magnitude on vertical axis</span></div><canvas id="fftPlot"></canvas></article><article class="card"><h3>How to read the spectrum</h3><ol class="number-list"><li><b>Carrier:</b> a strong component appears around f<sub>c</sub>.</li><li><b>Sidebands:</b> FM creates components around the carrier.</li><li><b>Spacing:</b> for a single-tone message, important components are separated approximately by f<sub>m</sub>.</li><li><b>Bandwidth:</b> significant components extend over a range that grows with deviation and message frequency.</li></ol><button class="secondary full" data-jump="simulation">Adjust parameters →</button></article></div>
+  <div class="spectrum-marker-strip"><div><span>LOWER SIDEBAND</span><b id="specLow">75 Hz</b></div><div class="marker-main"><span>CARRIER</span><b id="specCarrier">100 Hz</b></div><div><span>UPPER SIDEBAND</span><b id="specHigh">125 Hz</b></div><div class="bandwidth-pill">BW ≈ <b id="specBandwidth">60 Hz</b></div></div>
+  <div class="two-col"><article class="card"><h3>FFT workflow used here</h3><div class="workflow"><span>Sample</span><b>→</b><span>Window / prepare</span><b>→</b><span>FFT</span><b>→</b><span>|X(f)|</span><b>→</b><span>Plot</span></div><p class="muted">The browser implementation uses a numerical discrete Fourier transform/FFT on the simulated samples. It is intended for visualization rather than precision RF spectrum measurement.</p></article><article class="card"><h3>Try this investigation</h3><p>Keep Δf fixed and increase f<sub>m</sub>. Calculate β each time and compare the displayed bandwidth. Then keep f<sub>m</sub> fixed and increase Δf.</p><div class="investigation"><span>β = Δf / f<sub>m</sub></span><span>B<sub>T</sub> ≈ 2(Δf + f<sub>m</sub>)</span></div></article></div>
+</section>
+
+<!-- CHANNEL -->
+<section id="channel" class="view">
+  <div class="page-head"><div><div class="eyebrow">06 • CHANNEL & NOISE</div><h1>What happens between transmitter and receiver?</h1><p>A communication link is not ideal. This module lets you observe attenuation and additive noise before the demodulator attempts recovery.</p></div><div class="page-number">06</div></div>
+  <div class="channel-diagram"><div class="node source"><b>MESSAGE</b><small>information</small></div><span>→</span><div class="node mod"><b>FM MODULATOR</b><small>frequency variation</small></div><span>→</span><div class="channel-box"><div class="node"><b>CHANNEL</b><small>attenuation + noise</small></div><div class="noise-lines">≈ ≋ ≈</div></div><span>→</span><div class="node demod"><b>FM DEMOD</b><small>frequency → voltage</small></div><span>→</span><div class="node output"><b>RECOVERED</b><small>estimated message</small></div></div>
+  <div class="two-col"><article class="card"><h3>Attenuation</h3><p>Attenuation reduces the amplitude of the received waveform. In this educational simulator it is represented as a simple gain reduction.</p><div class="bar-demo"><i style="width:100%">Transmitted</i><i style="width:60%">Received</i></div></article><article class="card"><h3>Additive noise</h3><p>Noise is modeled as a random disturbance added to the signal. As noise increases, the receiver has a harder task estimating the instantaneous phase/frequency.</p><div class="noise-demo">signal + n(t) = received waveform</div></article></div>
+  <div class="warning"><b>Observation prompt:</b> Find a noise level where the recovered message is visibly distorted. Record the approximate noise setting, attenuation setting and the corresponding β and bandwidth.</div>
+</section>
+
+<!-- WALKIE -->
+<section id="walkie" class="view">
+  <div id="walkieIntro" class="walkie-intro">
+    <div class="walkie-intro-grid"></div><div class="walkie-scanline"></div>
+    <div class="walkie-intro-orbit oi1"></div><div class="walkie-intro-orbit oi2"></div>
+    <div class="walkie-intro-content">
+      <div class="eyebrow">07 • FM RADIO COMMUNICATION</div>
+      <div class="walkie-intro-radios"><div class="intro-radio left">📻</div><div class="intro-link"><span></span><span></span><span></span></div><div class="intro-radio right">📻</div></div>
+      <div class="walkie-intro-title"><span>VIRTUAL</span> WALKIE-TALKIE</div>
+      <p>Experience the complete FM communication chain in motion.</p>
+      <div class="intro-chain"><b>VOICE</b><i>→</i><b>FM</b><i>→</i><b>RF CHANNEL</b><i>→</i><b>DEMOD</b><i>→</i><b>VOICE</b></div>
+      <button id="enterWalkie" class="enter-lab walkie-enter">START RADIO SIMULATION <span>→</span></button>
+      <small>Educational simulation • No real RF transmission</small>
+    </div>
+  </div>
+  <div class="page-head"><div><div class="eyebrow">07 • APPLICATION MODULE</div><h1>Virtual FM Walkie-Talkie Simulator</h1><p>A separate practical module built on the same FM communication chain. Press and hold <b>PTT</b> to simulate transmission.</p></div><div class="live-pill orange"><i></i> PTT RADIO</div></div>
+  <div class="walkie-hero">
+    <div class="walkie-image-card"><div class="image-label">HISTORICAL FM RADIO</div><img src="assets/walkie-radio.svg" alt="SCR-300 portable FM voice receiver transmitter, Motorola, 1940"><small>SCR-300 portable FM voice receiver-transmitter • CC0 / public domain image</small></div>
+    <div class="walkie-story"><div class="eyebrow">WHY A WALKIE-TALKIE?</div><h2>FM theory becomes a communication system.</h2><p>A walkie-talkie is a two-way radio. In this virtual version, the microphone/audio source provides the message, an FM stage varies the carrier frequency, the channel adds optional impairments, and the receiver reconstructs the audio.</p><div class="radio-chain"><div>🎙<b>Audio</b><small>message</small></div><span>→</span><div>〰<b>FM</b><small>modulate</small></div><span>→</span><div>📡<b>Channel</b><small>noise/loss</small></div><span>→</span><div>〰<b>Demod</b><small>recover</small></div><span>→</span><div>🔊<b>Audio</b><small>output</small></div></div></div>
+  </div>
+
+  <div class="walkie-link-stage" id="walkieVisual">
+    <div class="link-stage-top">
+      <div><div class="eyebrow">LIVE COMMUNICATION PATH</div><h2>Two-way FM link: modulation → wireless channel → demodulation</h2></div>
+      <div class="link-status"><i></i><span id="linkStatusText">RECEIVER READY</span></div>
+    </div>
+    <div class="dual-radio-scene">
+      <div class="radio-corner radio-left">
+        <div class="radio-badge">TRANSMITTER</div>
+        <div class="mini-radio-card">
+          <div class="mini-antenna"></div>
+          <img src="assets/walkie-radio.svg" alt="Vintage handheld walkie-talkie radio">
+          <div class="mini-radio-glow"></div>
+        </div>
+        <div class="radio-caption"><b>WALKIE-TALKIE A</b><span>PTT • AUDIO INPUT</span></div>
+      </div>
+
+      <div class="signal-lane">
+        <div class="signal-node message-node">
+          <span class="node-kicker">01 • MESSAGE</span>
+          <strong>Audio / m(t)</strong>
+          <div class="wave-strip audio-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <small>Baseband information</small>
+        </div>
+        <div class="signal-arrow">→</div>
+        <div class="signal-node fm-node">
+          <span class="node-kicker">02 • MODULATOR</span>
+          <strong>FM Signal</strong>
+          <div class="wave-strip fm-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <small>Frequency varies • amplitude constant</small>
+        </div>
+        <div class="wireless-link"><div class="link-label">RF CHANNEL</div><div class="link-line"><i></i><i></i><i></i><i></i><i></i></div><small>noise + attenuation</small></div>
+        <div class="signal-node demod-node">
+          <span class="node-kicker">03 • DEMODULATOR</span>
+          <strong>Recovered Audio</strong>
+          <div class="wave-strip recovered-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <small>Estimated message signal</small>
+        </div>
+        <div class="signal-arrow">→</div>
+      </div>
+
+      <div class="radio-corner radio-right">
+        <div class="radio-badge">RECEIVER</div>
+        <div class="mini-radio-card">
+          <div class="mini-antenna"></div>
+          <img class="mirrored-radio" src="assets/walkie-radio.svg" alt="Vintage handheld walkie-talkie radio receiver">
+          <div class="mini-radio-glow"></div>
+        </div>
+        <div class="radio-caption"><b>WALKIE-TALKIE B</b><span>RX • AUDIO OUTPUT</span></div>
+      </div>
+    </div>
+    <div class="link-equation"><span>Audio</span><b>→</b><span class="eq-blue">FM Modulation</span><b>→</b><span class="eq-orange">Channel + Noise</span><b>→</b><span class="eq-purple">FM Demodulation</span><b>→</b><span>Audio</span></div>
+  </div>
+  <div class="transmission-animation" aria-live="polite">
+    <div class="transmission-header"><div><div class="eyebrow">SIGNAL TRANSMISSION IN MOTION</div><h2>Watch the message travel from Walkie-Talkie A to Walkie-Talkie B</h2><p id="txStoryText">The microphone converts voice into an electrical message signal.</p></div><div class="story-status"><i></i><b id="txStoryStep">MICROPHONE</b></div></div>
+    <div class="story-track">
+      <div class="story-device left"><span>TX</span><strong>📻 A</strong><small>Transmitter</small></div>
+      <div class="story-stage"><div class="story-stage-label"><b>1</b><span>VOICE</span></div><div class="story-wave voice"></div></div>
+      <div class="story-arrow">›</div>
+      <div class="story-stage"><div class="story-stage-label"><b>2</b><span>FM MODULATOR</span></div><div class="story-wave fm"></div></div>
+      <div class="story-arrow">›</div>
+      <div class="story-channel"><div class="radar-ring rr1"></div><div class="radar-ring rr2"></div><span>RF</span><div class="travel-packet p-a"></div><div class="travel-packet p-b"></div><div class="travel-packet p-c"></div><small>WIRELESS CHANNEL</small></div>
+      <div class="story-arrow">›</div>
+      <div class="story-stage"><div class="story-stage-label"><b>4</b><span>DEMODULATOR</span></div><div class="story-wave recovered"></div></div>
+      <div class="story-arrow">›</div>
+      <div class="story-device right"><span>RX</span><strong>📻 B</strong><small>Receiver</small></div>
+    </div>
+    <div class="story-legend"><span><i class="dot cyan"></i> message</span><span><i class="dot purple"></i> FM carrier</span><span><i class="dot rose"></i> RF packet</span><span><i class="dot mint"></i> recovered audio</span></div>
+  </div>
+  <div class="radio-console">
+    <div class="radio-device">
+      <div class="device-antenna"></div><div class="device-brand">FM-SS <small>VIRTUAL RADIO</small></div><div class="device-screen"><span id="radioMode">RX</span><b id="radioChannel">CH 01</b><em id="radioLevel">READY</em></div><div class="device-speaker"></div><div class="device-dials"><i></i><i></i></div><button id="ptt" class="ptt" type="button">HOLD TO TALK</button><div class="device-leds"><span id="txLed"></span> TX <span id="rxLed" class="on"></span> RX</div></div>
+    <div class="radio-controls">
+      <div class="control-head"><div><b>Radio controls</b><small>Everything is processed locally in your browser.</small></div><div id="radioStatus" class="status-chip">Receiver ready</div></div>
+      <div class="walkie-control-grid">
+        <label class="file-input"><span>🎙 Audio source</span><input id="audioFile" type="file" accept="audio/*"><small>Load WAV / MP3 / OGG or use the demo signal.</small></label>
+        <button id="demoAudio" class="secondary">Use demo voice-like signal</button>
+        <label><span>Channel noise</span><output id="wNoiseOut">10%</output><input id="wNoise" type="range" min="0" max="50" value="10"></label>
+        <label><span>Attenuation</span><output id="wAttOut">15%</output><input id="wAtt" type="range" min="0" max="80" value="15"></label>
+        <label><span>FM deviation</span><output id="wDevOut">2500 Hz</output><input id="wDev" type="range" min="500" max="5000" step="100" value="2500"></label>
+        <label><span>Radio channel</span><select id="radioCh"><option>CH 01 • 88.1 MHz*</option><option>CH 02 • 90.5 MHz*</option><option>CH 03 • 94.3 MHz*</option><option>CH 04 • 98.7 MHz*</option></select><small>*Display-only educational channel labels.</small></label>
+      </div>
+      <div class="radio-message" id="radioMessage">Demo audio is loaded. Press PTT to simulate a transmission.</div>
+    </div>
+  </div>
+  <div class="plot-grid walkie-plots">
+    <article class="plot-card"><div><h3>1. Audio / message</h3><span>baseband input</span></div><canvas id="wAudioPlot"></canvas></article>
+    <article class="plot-card"><div><h3>2. FM transmitted signal</h3><span>constant-envelope FM</span></div><canvas id="wFmPlot"></canvas></article>
+    <article class="plot-card"><div><h3>3. Received channel signal</h3><span>noise + attenuation</span></div><canvas id="wChanPlot"></canvas></article>
+    <article class="plot-card"><div><h3>4. Recovered audio</h3><span>demodulated estimate</span></div><canvas id="wRecPlot"></canvas></article>
+    <article class="plot-card wide"><div><h3>5. Audio frequency spectrum</h3><span>FFT of baseband input</span></div><canvas id="wAudioFFT"></canvas></article>
+    <article class="plot-card wide"><div><h3>6. FM spectrum</h3><span>carrier region and sidebands</span></div><canvas id="wFmFFT"></canvas></article>
+  </div>
+  <div class="history-grid">
+    <article class="card"><div class="eyebrow">HISTORICAL CONTEXT</div><h3>From military field radios to modern two-way communication</h3><p>The SCR-300 was a portable FM voice receiver-transmitter associated with WWII-era field communication. Its inclusion here is historical context: the simulator does not reproduce its hardware, power system or real RF operation.</p><div class="timeline"><div><b>1940s</b><span>Portable radio technology became an important field-communication tool.</span></div><div><b>FM principle</b><span>Information is represented through carrier-frequency variation rather than carrier-amplitude variation.</span></div><div><b>Modern use</b><span>Two-way radios continue to illustrate the transmitter → channel → receiver communication chain.</span></div></div></article>
+    <article class="card"><div class="eyebrow">ENGINEERING CONNECTION</div><h3>What your simulator is actually teaching</h3><ul class="checklist"><li>Baseband versus passband signals</li><li>Instantaneous frequency</li><li>Frequency deviation and modulation index</li><li>Fourier-domain interpretation</li><li>Noise and attenuation</li><li>Demodulation and signal recovery</li><li>System-level thinking in communication engineering</li></ul></article>
+  </div>
+</section>
+
+<!-- OBSERVATIONS -->
+<section id="observations" class="view">
+  <div class="page-head"><div><div class="eyebrow">08 • OBSERVATIONS & RESULT</div><h1>Record what you observe</h1><p>Use these tables directly while performing the experiment. Values update when you run the main simulator.</p></div><div class="page-number">08</div></div>
+  <div class="observation-summary"><div><span>Current β</span><b id="obsBeta">5.00</b></div><div><span>Current bandwidth</span><b id="obsBW">60 Hz</b></div><div><span>Noise</span><b id="obsNoise">0%</b></div><div><span>Attenuation</span><b id="obsAtt">0%</b></div></div>
+  <div class="table-card"><table><thead><tr><th>Parameter</th><th>Symbol</th><th>Example/default</th><th>What to observe</th></tr></thead><tbody><tr><td>Message frequency</td><td>f<sub>m</sub></td><td id="obsFm">5 Hz</td><td>Controls how quickly instantaneous frequency varies.</td></tr><tr><td>Carrier frequency</td><td>f<sub>c</sub></td><td id="obsFc">100 Hz</td><td>Sets the central carrier location.</td></tr><tr><td>Frequency deviation</td><td>Δf</td><td id="obsDev">25 Hz</td><td>Larger deviation produces larger frequency swings.</td></tr><tr><td>Modulation index</td><td>β</td><td id="obsBeta2">5.00</td><td>Ratio of deviation to message frequency.</td></tr><tr><td>Bandwidth</td><td>B<sub>T</sub></td><td id="obsBW2">60 Hz</td><td>Carson estimate grows with Δf and f<sub>m</sub>.</td></tr><tr><td>Noise</td><td>n(t)</td><td>Adjustable</td><td>Distorts the received waveform and recovery.</td></tr></tbody></table></div>
+  <div class="result-card"><div class="result-mark">✓</div><div><div class="eyebrow">RESULT</div><h2>Expected conclusion</h2><p>Frequency modulation was generated and analyzed in time and frequency domains. The experiment demonstrates that FM information is represented by variations in instantaneous frequency, that frequency deviation and message frequency determine the modulation index and approximate bandwidth, and that channel noise/attenuation can degrade the received and recovered signal. The walkie-talkie simulator demonstrates the same chain as a practical communication application.</p></div></div>
+</section>
+
+<!-- VIVA -->
+<section id="viva" class="view">
+  <div class="page-head"><div><div class="eyebrow">09 • SELF EVALUATION</div><h1>Viva questions</h1><p>Try answering without looking at the theory. Submit the quiz to check your score.</p></div><div class="page-number">09</div></div>
+  <div class="viva-tools"><div><b>Viva Challenge</b><span>Practice explaining the concepts without notes.</span></div><button id="randomViva" class="secondary">↻ New Question Order</button><button id="presentationViva" class="primary">🎓 Presentation Mode</button></div>
+  <div id="quizBox" class="quiz-box"></div>
+</section>
+
+<!-- REFERENCES -->
+<section id="references" class="view">
+  <div class="page-head"><div><div class="eyebrow">10 • REFERENCES</div><h1>References & further reading</h1><p>The interface is original, while the academic structure is inspired by the step-by-step approach used by Virtual Labs.</p></div><div class="page-number">10</div></div>
+  <div class="ref-grid">
+    <article class="card"><div class="ref-tag">VIRTUAL LABS</div><h3>National Virtual Labs</h3><p>Virtual Labs recommends step-by-step instructions and supports remote laboratory learning through browser-based experiments.</p><a href="https://www.vlab.co.in/ba-nptel-labs-electronics-and-communications" target="_blank" rel="noreferrer">Open Electronics & Communications labs ↗</a></article>
+    <article class="card"><div class="ref-tag">IIT BOMBAY</div><h3>Virtual Labs at IIT Bombay</h3><p>IIT Bombay hosts multiple Virtual Labs under the national initiative, including Electronics & Communications laboratories.</p><a href="https://www.vlab.co.in/participating-institute-iit-bombay" target="_blank" rel="noreferrer">Open IIT Bombay Virtual Labs ↗</a></article>
+    <article class="card"><div class="ref-tag">SIGNALS & SYSTEMS</div><h3>Fourier / FFT concepts</h3><p>Use a standard Signals & Systems or Digital Signal Processing textbook for deeper treatment of Fourier transforms, spectra and sampling.</p><p class="muted">Suggested: Oppenheim & Willsky, Signals and Systems; Oppenheim & Schafer, Discrete-Time Signal Processing.</p></article>
+    <article class="card"><div class="ref-tag">FM RADIO IMAGE</div><h3>SCR-300 historical photograph</h3><p>The walkie-talkie module uses a historical SCR-300 image from Wikimedia Commons. The source page identifies the photograph as CC0 / public domain.</p><a href="https://commons.wikimedia.org/wiki/File:SCR-300_battery-powered_FM_voice_receiver_transmitter,_Motorola,_1940_-_National_Electronics_Museum_-_DSC00176.JPG" target="_blank" rel="noreferrer">Open image source ↗</a></article>
+  </div>
+  <div class="credits"><b>Project note:</b> This is a student educational simulation. It is not affiliated with, endorsed by, or a reproduction of IIT Bombay / National Virtual Labs software.</div>
+</section>
+</main>
+</div>
+<footer class="footer">FM Signals Virtual Laboratory • Signals & Systems • Educational simulation • Built for browser-based learning</footer>
+<script src="app.js"></script>
+</body>
+</html>
